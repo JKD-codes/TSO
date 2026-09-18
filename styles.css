@@ -43,6 +43,18 @@ body {
   min-height: 100vh;
 }
 
+/* Interactive Background Ripple Canvas */
+#ripple-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.85;
+}
+
 /* Subtle Film Grain Noise Texture */
 .grain-overlay {
   position: fixed;
