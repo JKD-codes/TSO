@@ -294,13 +294,30 @@ function initBackgroundRipple() {
     }
   });
 
-  // Click event makes a pronounced burst ripple
+  // Click & Touch event makes a pronounced burst ripple
   window.addEventListener('click', (e) => {
     addRipple(e.clientX, e.clientY, 220, 3.2, 'rgba(245, 158, 11, ');
     setTimeout(() => {
       addRipple(e.clientX, e.clientY, 170, 2.4, 'rgba(255, 255, 255, ');
     }, 90);
   });
+
+  // Mobile Touch Support
+  window.addEventListener('touchstart', (e) => {
+    if (e.touches && e.touches[0]) {
+      const touch = e.touches[0];
+      addRipple(touch.clientX, touch.clientY, 180, 2.8, 'rgba(245, 158, 11, ');
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    const now = performance.now();
+    if (now - lastMove > 110 && e.touches && e.touches[0]) {
+      const touch = e.touches[0];
+      addRipple(touch.clientX, touch.clientY, 110, 1.9, 'rgba(229, 169, 60, ');
+      lastMove = now;
+    }
+  }, { passive: true });
 
   // Ambient gentle ripple every few seconds for alive atmospheric cinema feel
   setInterval(() => {
