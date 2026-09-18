@@ -143,6 +143,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Interactive Video Player Handlers
+  const videoFrames = document.querySelectorAll('.video-player-frame');
+  videoFrames.forEach(frame => {
+    frame.addEventListener('click', function(e) {
+      // Don't re-trigger if already playing
+      if (this.classList.contains('is-playing')) return;
+
+      const videoId = this.getAttribute('data-video-id');
+      const target = this.querySelector('.video-player-target');
+      if (videoId && target) {
+        this.classList.add('is-playing');
+        
+        // Dynamically create iframe
+        const iframe = document.createElement('iframe');
+        iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`);
+        iframe.setAttribute('title', 'YouTube video player');
+        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+        iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+        iframe.setAttribute('allowfullscreen', 'true');
+        target.appendChild(iframe);
+      }
+    });
+  });
+
   // Contact Form Submission
   const projectForm = document.getElementById('project-form');
   const formFeedback = document.getElementById('form-feedback');

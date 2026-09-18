@@ -623,6 +623,71 @@ h1, h2, h3, h4, .brand-title {
   width: 100%;
   padding-top: 56.25%; /* 16:9 Aspect Ratio */
   background: #000;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.video-poster {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease, filter 0.5s ease;
+  z-index: 1;
+}
+
+.video-player-frame:hover .video-poster {
+  transform: scale(1.04);
+  filter: brightness(0.85);
+}
+
+.play-trigger-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 64px;
+  height: 64px;
+  background: rgba(229, 169, 60, 0.95);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(229, 169, 60, 0.5);
+  cursor: pointer;
+  z-index: 2;
+  transition: var(--transition-smooth);
+}
+
+.play-trigger-btn svg {
+  width: 24px;
+  height: 24px;
+  margin-left: 3px;
+}
+
+.video-player-frame:hover .play-trigger-btn {
+  transform: translate(-50%, -50%) scale(1.12);
+  background: #ffffff;
+  color: #000000;
+  box-shadow: 0 10px 35px rgba(255, 255, 255, 0.5);
+}
+
+.video-player-frame.is-playing .video-poster,
+.video-player-frame.is-playing .play-trigger-btn {
+  display: none !important;
+}
+
+.video-player-target {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
 }
 
 .video-player-frame iframe {
@@ -632,6 +697,35 @@ h1, h2, h3, h4, .brand-title {
   width: 100%;
   height: 100%;
   border: 0;
+  z-index: 4;
+}
+
+.film-header-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.youtube-direct-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.25rem 0.65rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-subtle);
+  transition: var(--transition-smooth);
+}
+
+.youtube-direct-link:hover {
+  color: #ffffff;
+  background: #ff0000;
+  border-color: #ff0000;
 }
 
 .film-details {
