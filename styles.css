@@ -95,7 +95,8 @@ h1, h2, h3, h4, .brand-title {
   margin-bottom: 0.75rem;
 }
 
-.section-tag::before {
+.section-tag::before,
+.section-tag::after {
   content: "";
   display: inline-block;
   width: 18px;
