@@ -277,16 +277,22 @@ function initBackgroundRipple() {
     }
   }
 
+  function isMobile() {
+    return window.innerWidth <= 768;
+  }
+
   function addRipple(x, y, maxRadius = 160, speed = 2.5, color = 'rgba(229, 169, 60, ') {
+    if (isMobile()) return;
     if (ripples.length > maxRipples) {
       ripples.shift();
     }
     ripples.push(new Ripple(x, y, maxRadius, speed, color));
   }
 
-  // Mouse move event throttling
+  // Mouse move event throttling (Desktop only)
   let lastMove = 0;
   window.addEventListener('mousemove', (e) => {
+    if (isMobile()) return;
     const now = performance.now();
     if (now - lastMove > 90) {
       addRipple(e.clientX, e.clientY, 100, 1.8, 'rgba(229, 169, 60, ');
@@ -294,33 +300,18 @@ function initBackgroundRipple() {
     }
   });
 
-  // Click & Touch event makes a pronounced burst ripple
+  // Click event makes a pronounced burst ripple (Desktop only)
   window.addEventListener('click', (e) => {
+    if (isMobile()) return;
     addRipple(e.clientX, e.clientY, 220, 3.2, 'rgba(245, 158, 11, ');
     setTimeout(() => {
       addRipple(e.clientX, e.clientY, 170, 2.4, 'rgba(255, 255, 255, ');
     }, 90);
   });
 
-  // Mobile Touch Support
-  window.addEventListener('touchstart', (e) => {
-    if (e.touches && e.touches[0]) {
-      const touch = e.touches[0];
-      addRipple(touch.clientX, touch.clientY, 180, 2.8, 'rgba(245, 158, 11, ');
-    }
-  }, { passive: true });
-
-  window.addEventListener('touchmove', (e) => {
-    const now = performance.now();
-    if (now - lastMove > 110 && e.touches && e.touches[0]) {
-      const touch = e.touches[0];
-      addRipple(touch.clientX, touch.clientY, 110, 1.9, 'rgba(229, 169, 60, ');
-      lastMove = now;
-    }
-  }, { passive: true });
-
-  // Ambient gentle ripple every few seconds for alive atmospheric cinema feel
+  // Ambient gentle ripple every few seconds for alive atmospheric cinema feel (Desktop only)
   setInterval(() => {
+    if (isMobile()) return;
     const rx = Math.random() * width;
     const ry = Math.random() * height;
     addRipple(rx, ry, 180, 1.4, 'rgba(229, 169, 60, ');

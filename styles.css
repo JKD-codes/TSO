@@ -1126,6 +1126,11 @@ h1, h2, h3, h4, .brand-title {
     --nav-height: 68px;
   }
 
+  /* Disable ripple canvas in mobile view */
+  #ripple-canvas {
+    display: none !important;
+  }
+
   .container {
     padding: 0 1.2rem;
   }
