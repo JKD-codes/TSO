@@ -155,13 +155,20 @@ document.addEventListener('DOMContentLoaded', () => {
       if (videoId && target) {
         this.classList.add('is-playing');
         
+        let embedSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&playsinline=1`;
+        if (window.location.protocol.startsWith('http') && window.location.origin) {
+          embedSrc += `&origin=${encodeURIComponent(window.location.origin)}`;
+        }
+
         // Dynamically create iframe
         const iframe = document.createElement('iframe');
-        iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`);
+        iframe.setAttribute('src', embedSrc);
         iframe.setAttribute('title', 'YouTube video player');
         iframe.setAttribute('frameborder', '0');
         iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-        iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+        if (window.location.protocol.startsWith('http')) {
+          iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+        }
         iframe.setAttribute('allowfullscreen', 'true');
         target.appendChild(iframe);
       }
