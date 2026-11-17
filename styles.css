@@ -43,18 +43,6 @@ body {
   min-height: 100vh;
 }
 
-/* Interactive Background Ripple Canvas */
-#ripple-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.85;
-}
-
 /* Subtle Film Grain Noise Texture */
 .grain-overlay {
   position: fixed;
@@ -1168,11 +1156,6 @@ h1, h2, h3, h4, .brand-title {
 @media (max-width: 768px) {
   :root {
     --nav-height: 68px;
-  }
-
-  /* Disable ripple canvas in mobile view */
-  #ripple-canvas {
-    display: none !important;
   }
 
   .container {
